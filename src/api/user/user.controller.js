@@ -34,7 +34,7 @@ module.exports = {
 
   create: asyncHandler(async (req, res, next) => {
     const attrs = req.body;
-    
+
     try {
       const user = await service.create(attrs);
       res.status(Http.CREATED).json({ success: true, user });
@@ -89,5 +89,11 @@ module.exports = {
     };
 
     res.status(Http.OK).send({ success: true, message: 'Logout is successful' });
+  }),
+
+  delete: asyncHandler(async (req, res) => {
+    const { currentUser } = res.locals;
+    await service.delete(currentUser.id);
+    return res.status(Http.OK).json({ success: true, user: currentUser });
   })
 };

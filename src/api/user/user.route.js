@@ -21,7 +21,8 @@ module.exports = (app) => {
   router
     .route('/')
     .get(authorize, controller.getByAccess)
-    .post(validate(validator.create), controller.create);
+    .post(validate(validator.create), controller.create)
+    .delete(authorize, controller.delete);
 
   router
     .route('/token')

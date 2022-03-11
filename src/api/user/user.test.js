@@ -96,4 +96,33 @@ describe('/users api endpoint', () => {
       expect(response.status).toBe(Http.BAD_REQUEST);
     });
   });
+
+  describe(`PUT /users/:userId`, () => {
+    test(`Should update a user`, async () => {
+      const toUpdate = {
+        name: `Дженни Доу`,
+      };
+
+      const response = await request(app)
+        .put(`/users/${testUser.id}`)
+        .set('authorization', testUser.tokens.access)
+        .send(toUpdate)
+        .expect(Http.OK);
+
+      const { user } = response.body;
+      expect(user).toEqual(expect.objectContaining(toUpdate));
+    });
+  });
+
+  describe('DELETE /users', () => {
+    test('Should delete a user', async () => {
+      const response = await request(app)
+        .delete('/users')
+        .set('authorization', testUser.tokens.access)
+        .expect(Http.OK);
+
+      const { user } = response.body;
+      expect(testUser).toEqual(expect.objectContaining(user));
+    });
+  });
 });
