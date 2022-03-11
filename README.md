@@ -1,5 +1,7 @@
 # Блог
 
+![ci](https://github.com/qprquo/blog/actions/workflows/ci.yml/badge.svg)
+
 ## О проекте в этом репозитории
 
 Rest API для блога
