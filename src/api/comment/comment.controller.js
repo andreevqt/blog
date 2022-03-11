@@ -3,7 +3,7 @@
 const asyncHandler = require('express-async-handler');
 const service = require('./comment.service');
 const { Http } = require('../../constants');
-const validateId = require('../../utils/validate-id');
+const { validateId } = require('../../utils');
 
 module.exports.checkComment = asyncHandler(async (req, res, next, id) => {
   if (!validateId(id)) {

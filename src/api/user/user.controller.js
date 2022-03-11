@@ -94,6 +94,6 @@ module.exports = {
   delete: asyncHandler(async (req, res) => {
     const { currentUser } = res.locals;
     await service.delete(currentUser.id);
-    return res.status(Http.OK).json({ success: true, user: currentUser });
+    return res.status(Http.OK).json({ success: true, message: 'Deleted' });
   })
 };

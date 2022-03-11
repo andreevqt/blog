@@ -14,7 +14,7 @@ class User extends Model {
 
   static get modifiers() {
     return {
-      default: (query) => query
+      defaultSelect: (query) => query
     };
   }
 

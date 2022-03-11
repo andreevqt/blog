@@ -2,14 +2,10 @@
 
 const { Router } = require('express');
 const controller = require('./comment.controller');
-const createAuthorize = require('../user/middleware/authorize');
-const userService = require('../user/user.service');
-const jwtService = require('../user/jwt/jwt.service');
 const isCommentsAuthor = require('./middleware/is-comments-author');
 const validator = require('./comment.validator');
 const { validate } = require('../../core/middleware');
-
-const authorize = createAuthorize(userService, jwtService);
+const { authorize } = require('../user/helpers');
 
 const router = new Router();
 

@@ -3,20 +3,20 @@
 const User = require('./user.model');
 
 module.exports.get = (id) => {
-  return User.query().modify('default').findById(id);
+  return User.query().modify('defaultSelect').findById(id);
 };
 
 module.exports.getByEmail = (email) => {
-  return User.query().modify('default').where({ email }).first();
+  return User.query().modify('defaultSelect').where({ email }).first();
 };
 
 module.exports.list = (page, perPage) => {
-  return User.query().modify('default').page(page, perPage);
+  return User.query().modify('defaultSelect').page(page, perPage);
 };
 
-module.exports.create = async ({ avatar, ...rest }) => {
-  const user = await User.query().insert(rest);
-  return user.$query().modify('default');
+module.exports.create = async (attrs) => {
+  const user = await User.query().insert(attrs);
+  return user.$query().modify('defaultSelect');
 };
 
 module.exports.update = (id, attrs) => {

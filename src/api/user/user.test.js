@@ -121,8 +121,8 @@ describe('/users api endpoint', () => {
         .set('authorization', testUser.tokens.access)
         .expect(Http.OK);
 
-      const { user } = response.body;
-      expect(testUser).toEqual(expect.objectContaining(user));
+      const { message } = response.body;
+      expect(message).toBe('Deleted');
     });
   });
 });

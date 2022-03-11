@@ -4,12 +4,8 @@ const { Router } = require('express');
 const controller = require('./user.controller');
 const validator = require('./user.validator');
 const { validate } = require('../../core/middleware');
-const createAuthorize = require('./middleware/authorize');
-const userService = require('./user.service');
-const jwtService = require('./jwt/jwt.service');
+const { authorize } = require('./helpers');
 const isCurrentUser = require('./middleware/is-current-user');
-
-const authorize = createAuthorize(userService, jwtService);
 
 const router = new Router();
 
