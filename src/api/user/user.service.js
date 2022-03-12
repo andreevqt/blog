@@ -27,7 +27,7 @@ module.exports.update = (id, attrs) => {
 
 module.exports.logout = (token) => {
   return jwt.drop(undefined, token);
-}
+};
 
 // if it throws then forbidden
 module.exports.refresh = async (token) => {
