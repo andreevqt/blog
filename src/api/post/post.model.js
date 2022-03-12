@@ -1,7 +1,6 @@
 'use strict';
 
 const Model = require('../../core/model');
-const User = require('../user/user.model');
 
 class Post extends Model {
   static get tableName() {

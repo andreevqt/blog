@@ -19,6 +19,13 @@ class Comment extends Model {
     }
   }
 
+  static get modifiers() {
+    return {
+      defaultSelect: (query) => query
+        .withGraphFetched('author')
+    };
+  }
+
   toJSON() {
     return {
       id: this.id,

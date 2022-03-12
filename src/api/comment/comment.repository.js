@@ -3,15 +3,15 @@
 const Comment = require('./comment.model');
 
 module.exports.list = (page, perPage) => {
-  return Comment.query().withGraphFetched('author').page(page, perPage);
+  return Comment.query().modifiers('defaultSelect').page(page, perPage);
 };
 
 module.exports.get = (id) => {
-  return Comment.query().withGraphFetched('author').findById(id);
+  return Comment.query().modifiers('defaultSelect').findById(id);
 };
 
 module.exports.update = (id, attrs) => {
-  return Comment.query().withGraphFetched('author').patchAndFetchById(id, attrs);
+  return Comment.query().modifiers('defaultSelect').patchAndFetchById(id, attrs);
 }
 
 module.exports.delete = (id) => {
