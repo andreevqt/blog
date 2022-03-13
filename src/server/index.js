@@ -1,7 +1,7 @@
 'use strict';
 
 const { program } = require('commander');
-const pkg = require('../package.json');
+const pkg = require('../../package.json');
 const { serve, migrate, seed, secret } = require('./commands');
 
 program.version(pkg.version);

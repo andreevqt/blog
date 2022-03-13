@@ -3,17 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "transform": {}
   },
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --runInBand",
-    "version": "node ./src/index.js --version",
-    "start": "cross-env NODE_ENV=production node ./src/index.js serve",
-    "start::debug": "cross-env NODE_ENV=debug LOG_LEVEL=debug nodemon ./src/index.js serve",
-    "migrate": "node ./src/index.js migrate --type=migrate",
-    "migrate::refresh": "node ./src/index.js migrate --type=refresh",
-    "generate::secret": "node ./src/index.js secret",
-    "seed": "node ./src/index.js seed 100"
+    "version": "node ./src/server/index.js --version",
+    "build": "cross-env NODE_ENV=production webpack",
+    "watch": "cross-env NODE_ENV=development webpack --watch",
+    "start": "cross-env NODE_ENV=production node ./src/server/index.js serve",
+    "start::debug": "cross-env NODE_ENV=debug LOG_LEVEL=debug nodemon ./src/server/index.js serve",
+    "migrate": "node ./src/server/index.js migrate --type=migrate",
+    "migrate::refresh": "node ./src/server/index.js migrate --type=refresh",
+    "generate::secret": "node ./src/server/index.js secret",
+    "seed": "node ./src/server/index.js seed 100"
   },
   "keywords": [],
   "author": "",
@@ -37,14 +40,24 @@
     "objection": "3.0.1",
     "pino": "6.3.2",
     "pino-pretty": "4.0.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "sharp": "0.30.0",
     "swagger-jsdoc": "6.1.0",
     "swagger-ui-express": "4.3.0",
     "yup": "0.32.11"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.3",
+    "html-webpack-plugin": "5.5.0",
     "jest": "27.5.1",
+    "pug-loader": "2.4.0",
     "sqlite3": "5.0.2",
-    "supertest": "6.2.2"
+    "supertest": "6.2.2",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2"
   }
 }

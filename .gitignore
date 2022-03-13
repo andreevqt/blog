@@ -9,3 +9,7 @@ logs/*
 
 # rest client
 *.http
+
+# other
+build/
+dist/
