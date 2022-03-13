@@ -11,7 +11,9 @@ const purple = '#764abc';
 const blue = '#007bff';
 const gray100 = '#212529';
 const gray200 = '#6c757d';
-const gray300 = '#565c67';
+const gray300 = '#e3e3e3';
+const gray400 = '#f2f5f7';
+const gray500 = '#a7a7a7';
 const green = '#3bb33b';
 const red = '#ff3347';
 const white = '#fff';
@@ -22,10 +24,18 @@ const defaultTheme = {
     secondary: generatePalletteItem(white),
     success: generatePalletteItem(green),
     danger: generatePalletteItem(red),
+    white: generatePalletteItem(white),
   },
 
   bodyColor: gray100,
   mutedColor: gray200,
+  borderColor: gray300,
+  bodyBgColor: gray400,
+
+  inputPlaceholderColor: gray200,
+  inputBgColor: gray400,
+  inputColor: gray100,
+  inputBorderColor: gray500,
 
   container: {
     maxWidth: 1200

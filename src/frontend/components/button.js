@@ -117,8 +117,8 @@ const Button = styled(ButtonComponent)`
   ${({ theme, variant = 'primary', fullWidth = false, size = 'medium', loading = false }) => css`
     padding: 10px 20px;
     position: relative;
-    border-radius: 8px;
-    display: flex;
+    border-radius: 3px;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     transition: all .2s ease;

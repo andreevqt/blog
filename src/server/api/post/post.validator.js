@@ -11,10 +11,10 @@ module.exports = {
   create: Yup.object({
     title: Yup.string().required(),
     content: Yup.string().required()
-  }),
+  }).noUnknown(true).strict(),
 
   update: Yup.object({
     title: Yup.string(),
     content: Yup.string()
-  })
+  }).noUnknown(true).strict()
 };

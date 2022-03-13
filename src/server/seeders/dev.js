@@ -1,6 +1,7 @@
 'use strict';
 
 const { shuffle, randomInt } = require('../utils');
+const crypto = require('../core/crypto');
 
 const titles = [
   'Never Mess With Bread And Here\'s The Reasons Why.',
@@ -33,7 +34,7 @@ module.exports.seed = async (knex) => {
   const user = await knex('users').insert({
     name: 'admin',
     email: 'admin@admin.com',
-    _password: 'admin'
+    _password: crypto.hash('123456')
   });
 
   const posts = [...Array(count).keys()].map(() => ({

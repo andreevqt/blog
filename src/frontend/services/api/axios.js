@@ -1,11 +1,11 @@
 import axios from 'axios';
-/* import { store } from '../store'; */
+import * as api from '.';
 import { decode } from '../jwt.js';
-/* import { refresh } from '../slices/user'; */
+import Cookie from 'js-cookie';
 
 const BASE_URL = process.env.REACT_API_URL || 'https://localhost:3000/api';
 
-const isExpired = () => {
+const isExpired = (token) => {
   const splited = token.split(' ')[1];
   const { exp } = decode(splited);
   const current = Date.now() / 1000;
@@ -33,30 +33,42 @@ const errorHandler = (err) => {
   return Promise.reject(err.message);
 };
 
-/* requests.private.interceptors.request.use(
+requests.private.interceptors.request.use(
   async (config) => {
-    const accessToken = store?.getState()?.user.accessToken;
+    const accessToken = Cookie.get('accessToken');
     if (accessToken && !isExpired(accessToken)) {
+      if (config.headers) {
+        config.headers['authorization'] = accessToken;
+      }
+
       return config;
     }
 
-    await store.dispatch(refresh());
+    try {
+      const refreshToken = Cookie.get('refreshToken');
+      if (!refreshToken) {
+        throw Error('Wrong or missing token');
+      };
 
-    const newAccessToken = store?.getState()?.user.accessToken;
-    if (!newAccessToken) {
-      throw new axios.Cancel('No access token present');
+      const { tokens } = await api.user.refresh(refreshToken);
+      Cookie.set('accessToken', tokens.access);
+      Cookie.set('refreshToken', tokens.refresh);
+
+      if (config.headers) {
+        config.headers['authorization'] = newAccessToken;
+      }
+
+      return config;
+    } catch (err) {
+      Cookie.remove('accessToken');
+      Cookie.remove('refreshToken');
+      throw new axios.Cancel('Wrong or missing token');
     }
-
-    if (config?.headers) {
-      config.headers['authorization'] = newAccessToken;
-    }
-
-    return config;
   },
   (err) => {
     return Promise.reject(err);
   }
-); */
+);
 
 requests.public.interceptors.response.use((response) => response, errorHandler);
 requests.private.interceptors.response.use((response) => response, errorHandler);

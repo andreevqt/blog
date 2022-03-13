@@ -20,6 +20,11 @@ module.exports = {
     next();
   }),
 
+  get: asyncHandler(async (req, res) => {
+    const { post } = res.locals;
+    res.status(Http.OK).json({ success: true, post });
+  }),
+
   list: asyncHandler(async (req, res) => {
     const { page, perPage } = req.query;
     const result = await service.list(page, perPage);

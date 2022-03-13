@@ -15,7 +15,7 @@
     "test": "cross-env NODE_ENV=test jest --runInBand",
     "version": "node ./src/server/index.js --version",
     "build": "cross-env NODE_ENV=production webpack",
-    "watch": "cross-env NODE_ENV=development webpack --watch",
+    "dev": "webpack serve --mode=development",
     "start": "cross-env NODE_ENV=production node ./src/server/index.js serve",
     "start::debug": "cross-env NODE_ENV=debug LOG_LEVEL=debug nodemon ./src/server/index.js serve",
     "migrate": "node ./src/server/index.js migrate --type=migrate",
@@ -27,6 +27,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@pmmmwh/react-refresh-webpack-plugin": "github:pmmmwh/react-refresh-webpack-plugin",
     "@reduxjs/toolkit": "1.8.0",
     "axios": "0.25.0",
     "bcrypt": "5.0.1",
@@ -38,6 +39,7 @@
     "dotenv": "^14.3.2",
     "express": "4.17.2",
     "express-async-handler": "1.2.0",
+    "js-cookie": "3.0.1",
     "jsonwebtoken": "8.5.1",
     "knex": "0.95.15",
     "lodash": "4.17.21",
@@ -49,7 +51,9 @@
     "pino-pretty": "4.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-hook-form": "7.28.0",
     "react-redux": "7.2.6",
+    "react-refresh": "^0.11.0",
     "react-router-dom": "5.3.0",
     "redux": "4.1.2",
     "regenerator-runtime": "0.13.9",
@@ -64,6 +68,7 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "babel-loader": "^8.2.3",
+    "babel-plugin-styled-components": "^2.0.6",
     "color": "4.2.1",
     "css-loader": "^6.7.1",
     "html-webpack-plugin": "5.5.0",
@@ -73,6 +78,7 @@
     "style-loader": "^3.3.1",
     "supertest": "6.2.2",
     "webpack": "^5.70.0",
-    "webpack-cli": "^4.9.2"
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
   }
 }

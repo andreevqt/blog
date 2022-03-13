@@ -10,7 +10,7 @@ const definition = {
     version: pkg.version
   },
   servers: [{
-    url: `http://localhost:${config.get('app.port')}/${config.get('app.prefix')}`,
+    url: `http://localhost:${config.get('app.port')}${config.get('app.prefix')}`,
     description: 'Development server'
   }, {
     url: 'https://blog.kino-reaction.ru/api',

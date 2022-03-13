@@ -26,6 +26,7 @@ class Post extends Model {
     return {
       defaultSelect: (query) => query
         .withGraphFetched('author')
+        .orderBy('created_at', 'desc')
     };
   }
 

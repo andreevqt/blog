@@ -10,6 +10,7 @@ const config = require('../config');
 const connectToDb = require('./database');
 const api = require('../api');
 const swagger = require('./swagger');
+const cors = require('cors');
 
 module.exports = async (app) => {
   // init db
@@ -20,6 +21,7 @@ module.exports = async (app) => {
   app.use(express.urlencoded({
     extended: false
   }));
+  app.use(cors());
   // serve static file
   app.use(express.static(`${process.cwd()}/dist`));
   // docs
@@ -30,7 +32,7 @@ module.exports = async (app) => {
   app.route('/', (req, res) => res.sendFile(`${process.cwd()}/dist/index.html`));
   // api routes
   app.use(config.get('app.prefix'), api);
-  // error handlers
+  // fallback to spa app
   app.use((req, res, next) => res.status(Http.NOT_FOUND).send('Not found'));
   app.use(errorHandler);
 };

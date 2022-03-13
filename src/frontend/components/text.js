@@ -36,13 +36,13 @@ const getVariant = (variant) => {
     }
     case 'h4': {
       return css`
-        font-size: 22px;
+        font-size: 20px;
         margin-bottom: 15px;
       `;
     }
     case 'h5': {
       return css`
-        font-size: 18px;
+        font-size: 16px;
         margin-bottom: 15px;
       `;
     }

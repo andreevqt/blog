@@ -87,6 +87,8 @@ module.exports = (app) => {
 
   router
     .route('/:postId')
+    // TODO: document this
+    .get(controller.get)
     /**
      * @swagger
      * /posts/{id}:
