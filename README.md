@@ -6,6 +6,9 @@
 
 Rest API для блога
 
+[Демо](https://blog.kino-reaction.ru)<br>
+[Документация](https://blog.kino-reaction.ru/docs)
+
 ## Запуск
 
 Убедитесь что на вашей системе установлена mariadb или mysql.<br/>
