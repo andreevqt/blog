@@ -10,11 +10,11 @@ const definition = {
     version: pkg.version
   },
   servers: [{
+    url: 'https://api.kino-reaction.ru/api',
+    description: 'Staging server'
+  }, {
     url: `http://localhost:${config.get('app.port')}${config.get('app.prefix')}`,
     description: 'Development server'
-  }, {
-    url: 'https://blog.kino-reaction.ru/api',
-    description: 'Staging server'
   }],
   license: {
     name: 'MIT',

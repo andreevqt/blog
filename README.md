@@ -6,8 +6,8 @@
 
 Rest API для блога
 
-[Демо](https://blog.kino-reaction.ru)<br>
-[Документация](https://blog.kino-reaction.ru/docs)
+[Демо](https://api.kino-reaction.ru) Данные для входа: логин - `admin@admin.com`, пароль - `123456` <br>
+[Документация](https://api.kino-reaction.ru/docs)
 
 ## Запуск
 
