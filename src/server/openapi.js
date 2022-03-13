@@ -1,6 +1,7 @@
 'use strict';
 
 const pkg = require('../../package.json');
+const config = require('./config');
 
 const definition = {
   openapi: '3.0.0',
@@ -9,7 +10,7 @@ const definition = {
     version: pkg.version
   },
   servers: [{
-    url: 'http://localhost:3000',
+    url: `http://localhost:${config.get('app.port')}/${config.get('app.prefix')}`,
     description: 'Development server'
   }, {
     url: 'https://blog.kino-reaction.ru/api',
@@ -24,7 +25,7 @@ const definition = {
     description: 'Endpoints to deal with users'
   }, {
     name: 'posts',
-    description: 'Endpoints to deal with with posts'
+    description: 'Endpoints to deal with posts'
   }],
   components: {
     securitySchemes: {

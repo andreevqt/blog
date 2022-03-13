@@ -1,9 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-const title = 'React this is cool';
+import App from './components/app';
+import { Provider } from 'react-redux';
+import { store } from './services/store';
+import './index.css';
 
 ReactDOM.render(
-  <h1>{title}</h1>,
+  <Provider store={store}>
+    <App />
+  </Provider>
+  ,
   document.getElementById('app')
 );

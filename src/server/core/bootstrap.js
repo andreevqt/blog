@@ -15,26 +15,22 @@ module.exports = async (app) => {
   // init db
   const knex = await connectToDb();
   Model.knex(knex);
-
   // express
   app.use(express.json());
   app.use(express.urlencoded({
     extended: false
   }));
-
+  // serve static file
   app.use(express.static(`${process.cwd()}/dist`));
-
-  // front
-  app.use('/', (req, res) => res.sendFile(`${process.cwd()}/dist/index.html`));
-
   // docs
   swagger(app);
-
+  // log requests
   app.use(logRequests);
-
+  // front
+  app.route('/', (req, res) => res.sendFile(`${process.cwd()}/dist/index.html`));
+  // api routes
   app.use(config.get('app.prefix'), api);
-
-  app.use(express.static(path.resolve(__dirname, '../public')))
-  app.use((req, res) => res.status(Http.NOT_FOUND).send('Not found'));
+  // error handlers
+  app.use((req, res, next) => res.status(Http.NOT_FOUND).send('Not found'));
   app.use(errorHandler);
 };
