@@ -3,7 +3,7 @@ import * as api from '.';
 import { decode } from '../jwt.js';
 import Cookie from 'js-cookie';
 
-const BASE_URL = process.env.REACT_API_URL || 'https://localhost:3000/api';
+const BASE_URL = process.env.REACT_API_URL || 'http://localhost:3000/api';
 
 const isExpired = (token) => {
   const splited = token.split(' ')[1];
