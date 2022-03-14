@@ -33,6 +33,9 @@ const CardBody = styled.div`
     border-top: 1px solid ${theme.borderColor};
     padding: 20px;
   `}
+  img {
+    margin-bottom: 10px;
+  }
 `;
 
 const Icon = styled.div`
@@ -78,9 +81,7 @@ const PostCard = ({
         </Icon>
       </CardHeader>
       {isOpen && (
-        <CardBody>
-          {post.content}
-        </CardBody>
+        <CardBody dangerouslySetInnerHTML={{__html: post.content}} />
       )}
       {isAuthor && (
         <EditBtn onClick={onEditClick}>

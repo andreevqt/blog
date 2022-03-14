@@ -47,6 +47,11 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
+  img {
+    width: 100%;
+    height: auto;
+  }
+
   .mr-10 {
     margin-right: 10px !important;
   }

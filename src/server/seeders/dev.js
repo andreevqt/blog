@@ -14,11 +14,11 @@ const titles = [
 ];
 
 const contents = [
-  'A Kennewick woman wanted an insurance company to pay for a vacation and for missing time at work, but she ended up earning a jail sentence instead.',
-  'Sheriff Chris Swanson is working hard to help communities across the U.S. battle high recidivism rates through a program aimed at inmate education, while also applauding President Biden after his recent commitment to support law enforcement.',
-  'The Firefly-class Serenity transport vessel was purchased by Malcolm Reynolds after the Unification War, and its name was inspired by the battle of Serenity Valley. Considering it was the ship for Captain Mal and his crew, It is also a fitting choice for Hero Collector\'s first Firefly ship.',
-  'The report, based on nearly 90 interviews, community listening sessions, 2,400 documents, and the review of over 30 hours of police body camera footage, concluded that many in the city found that the mayor’s office and police department leadership were “rudderless.”',
-  'The city had an emergency plan for large-scale breakdowns in public order that was “well written, comprehensive and consistent,” but top officials didn’t appear to follow it as police officers fired riot control weapons at peaceful protesters, and rioters destroyed millions of dollars worth of property.'
+  '<img src="https://cdn.pixabay.com/photo/2021/10/13/15/09/water-6706894_960_720.jpg" alt="water"><p>A Kennewick woman wanted an insurance company to pay for a vacation and for missing time at work, but she ended up earning a jail sentence instead.</p>',
+  '<p>Sheriff Chris Swanson is working hard to help communities across the U.S. battle high recidivism rates through a program aimed at inmate education, while also applauding President Biden after his recent commitment to support law enforcement.</p>',
+  '<img src="https://cdn.pixabay.com/photo/2021/10/13/15/09/water-6706894_960_720.jpg" alt="water"><p>The Firefly-class Serenity transport vessel was purchased by Malcolm Reynolds after the Unification War, and its name was inspired by the battle of Serenity Valley. Considering it was the ship for Captain Mal and his crew, It is also a fitting choice for Hero Collector\'s first Firefly ship.</p>',
+  '<p>The report, based on nearly 90 interviews, community listening sessions, 2,400 documents, and the review of over 30 hours of police body camera footage, concluded that many in the city found that the mayor’s office and police department leadership were “rudderless.”</p>',
+  '<img src="https://cdn.pixabay.com/photo/2021/10/13/15/09/water-6706894_960_720.jpg" alt="water"><p>The city had an emergency plan for large-scale breakdowns in public order that was “well written, comprehensive and consistent,” but top officials didn’t appear to follow it as police officers fired riot control weapons at peaceful protesters, and rioters destroyed millions of dollars worth of property.</p>'
 ];
 
 module.exports.seed = async (knex) => {

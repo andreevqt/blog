@@ -62,14 +62,15 @@ export const logoutUser = createAsyncThunk(
     try {
       const refreshToken = Cookie.get('refreshToken');
       await api.user.logout(refreshToken);
+    } catch (err) {
+      dispatch(setError(err));
+      return rejectWithValue(err);
+    } finally  {
       Cookie.remove('accessToken');
       Cookie.remove('refreshToken');
       if (cb) {
         cb();
       }
-    } catch (err) {
-      dispatch(setError(err));
-      return rejectWithValue(err);
     };
   }
 );
@@ -120,6 +121,7 @@ const userSlice = createSlice({
       state.user = null;
     });
     builder.addCase(logoutUser.rejected, (state, action) => {
+      state.user = null;
       state.isLoading = false;
     });
     builder.addCase(logoutUser.pending, (state, action) => {
