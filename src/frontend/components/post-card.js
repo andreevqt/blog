@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Text from './text';
 import ChevronDown from '../icons/chevron-down';
 import Pen from '../icons/pen';
+import Trash from '../icons/trash';
 import { useSelector } from 'react-redux';
+import { deletePost } from '../services/slices/posts';
 
 const Card = styled.div`
   position: relative;
@@ -12,7 +15,7 @@ const Card = styled.div`
   box-shadow: 0 1px 2px rgb(48 54 60 / 15%);
   border-radius: 3px;
   margin-bottom: 15px;
-`
+`;
 
 const CardTitle = styled(Text).attrs(() => ({ variant: 'h5', className: 'mb-0' }))`
   -webkit-line-clamp: 1;
@@ -44,19 +47,24 @@ const Icon = styled.div`
   font-size: 0;
 `;
 
-const EditBtn = styled.div`
+const CardBtn = styled.div`
   cursor: pointer;
-  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
-  right: -60px;
-  top: 0;
   background-color: #fff;
   border-radius: 50%;
   width: 48px;
   height: 48px;
   box-shadow: 0 1px 2px rgb(48 54 60 / 15%);
+  margin-right: 10px;
+`;
+
+const Buttons = styled.div`
+  position: absolute;
+  right: -130px;
+  top: 0;
+  display: flex;
 `;
 
 const PostCard = ({
@@ -70,6 +78,13 @@ const PostCard = ({
   const history = useHistory();
   const onEditClick = () => history.push({ pathname: `/post/${post.id}` });
 
+  const dispatch = useDispatch();
+  const onDeleteClick = () => {
+    if (confirm('Do you really want to delete this post')) {
+      dispatch(deletePost(post.id));
+    }
+  }
+
   return (
     <Card>
       <CardHeader onClick={() => setOpen(!isOpen)}>
@@ -81,12 +96,17 @@ const PostCard = ({
         </Icon>
       </CardHeader>
       {isOpen && (
-        <CardBody dangerouslySetInnerHTML={{__html: post.content}} />
+        <CardBody dangerouslySetInnerHTML={{ __html: post.content }} />
       )}
       {isAuthor && (
-        <EditBtn onClick={onEditClick}>
-          <Pen width="16" height="16" />
-        </EditBtn>
+        <Buttons>
+          <CardBtn onClick={onEditClick}>
+            <Pen width="16" height="16" />
+          </CardBtn>
+          <CardBtn onClick={onDeleteClick}>
+            <Trash width="16" height="16" />
+          </CardBtn>
+        </Buttons>
       )}
     </Card>
   );

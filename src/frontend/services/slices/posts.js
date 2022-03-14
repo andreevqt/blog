@@ -20,7 +20,7 @@ export const fetchPosts = createAsyncThunk(
 
 export const createPost = createAsyncThunk(
   'posts/create',
-  async (data, { getState, rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       return api.posts.create(data);
     } catch (err) {
@@ -32,7 +32,7 @@ export const createPost = createAsyncThunk(
 
 export const updatePost = createAsyncThunk(
   'posts/update',
-  async (data, { getState, rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     const { id, ...rest } = data;
     try {
       return api.posts.update(id, rest);
@@ -46,10 +46,23 @@ export const updatePost = createAsyncThunk(
 
 export const getPost = createAsyncThunk(
   'posts/get',
-  async (id, { getState, rejectWithValue }) => {
+  async (id, { rejectWithValue }) => {
     try {
       const { post } = await api.posts.get(id);
       return post;
+    } catch (err) {
+      dispatch(setError(err));
+      return rejectWithValue(err);
+    }
+  }
+);
+
+export const deletePost = createAsyncThunk(
+  'posts/delete',
+  async (id, { rejectWithValue }) => {
+    try {
+      await api.posts.delete(id);
+      return id;
     } catch (err) {
       dispatch(setError(err));
       return rejectWithValue(err);
@@ -120,6 +133,18 @@ const postsSlice = createSlice({
     builder.addCase(getPost.fulfilled, (state, action) => {
       state.currentPost = action.payload;
       state.isLoading = false;
+    });
+
+    builder.addCase(deletePost.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deletePost.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(deletePost.fulfilled, (state, action) => {
+      state.isLoading = false;
+      const id = action.payload;
+      state.items = state.items.filter((post) => post.id !== id);
     });
   }
 });

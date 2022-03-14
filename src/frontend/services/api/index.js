@@ -4,7 +4,8 @@ export const posts = {
   list: (page = 1, perPage = 15) => axios.public.get('/posts', { params: { page, perPage } }).then((response) => response.data),
   get: (id) => axios.public.get(`/posts/${id}`).then((response) => response.data),
   update: (id, data) => axios.private.put(`/posts/${id}`, data).then((response) => response.data),
-  create: (data) => axios.private.post('/posts', data).then((response) => response.data)
+  create: (data) => axios.private.post('/posts', data).then((response) => response.data),
+  delete: (id) => axios.private.delete(`/posts/${id}`).then((response) => response.data)
 };
 
 export const user = {

@@ -12,8 +12,6 @@ const Home = () => {
   const dispatch = useDispatch();
   const {
     items,
-    isLoading,
-    hasMore,
     page,
     totalPages
   } = useSelector((store) => store.posts);
