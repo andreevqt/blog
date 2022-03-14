@@ -32,7 +32,7 @@ const Register = () => {
               placeholder="Name"
               className="mb-15"
               error={!!errors.name}
-              errorText={errors.name && errors.email.name}
+              errorText={errors.name && errors.name.message}
               {...register('name', { required: 'Required field' })}
             />
             <Input
