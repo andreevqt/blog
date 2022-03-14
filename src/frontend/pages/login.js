@@ -50,7 +50,7 @@ const Login = () => {
               className="mb-20"
               error={!!errors.password}
               errorText={errors.password && errors.password.message}
-              {...register('password', { required: 'Required field' })}
+              {...register('password', { required: 'Required field', minLength: { value: 6, message: 'Minimum length is 6 characters' } })}
             />
             <Button
               fullWidth
