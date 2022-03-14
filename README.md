@@ -26,6 +26,7 @@ DB_DATABASE=<database_name>
 
 Выполните следующие команды:
 1. `npm install` - устанавливает зависимости 
-2. `npm run generate::secret` - генерирует secret key
-3. `npm run migrate` - применят миграции
-4. `npm run start::debug` или `npm run start` — запускает сервер
+2. `npm run build` - собирает frontend 
+3. `npm run generate::secret` - генерирует secret key
+4. `npm run migrate` - применят миграции
+5. `npm run start::debug` или `npm run start` — запускает сервер
