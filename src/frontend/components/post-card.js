@@ -8,6 +8,9 @@ import Pen from '../icons/pen';
 import Trash from '../icons/trash';
 import { useSelector } from 'react-redux';
 import { deletePost } from '../services/slices/posts';
+import sanitizeHtml from 'sanitize-html';
+
+const sanitize = (html) => ({ __html: sanitizeHtml(html, { allowedTags: ['img', 'p'], allowedAttributes: { img: ['src', 'alt', 'srcset'] } }) });
 
 const Card = styled.div`
   position: relative;
@@ -85,6 +88,9 @@ const PostCard = ({
     }
   }
 
+  console.log(post.content);
+
+
   return (
     <Card>
       <CardHeader onClick={() => setOpen(!isOpen)}>
@@ -96,7 +102,7 @@ const PostCard = ({
         </Icon>
       </CardHeader>
       {isOpen && (
-        <CardBody dangerouslySetInnerHTML={{ __html: post.content }} />
+        <CardBody dangerouslySetInnerHTML={sanitize(post.content)} />
       )}
       {isAuthor && (
         <Buttons>
