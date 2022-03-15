@@ -180,7 +180,8 @@ const Element = (props) => {
 const insertImage = (editor, url) => {
   const text = { text: '' };
   const image = { type: 'image', url, children: [text] };
-  Transforms.insertNodes(editor, image);
+  const paragraph = { type: 'paragraph', children: [text] };
+  Transforms.insertNodes(editor, [image, paragraph]);
 };
 
 const withImages = (editor) => {
