@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
 import { Redirect, useParams } from 'react-router-dom';
+import { Form, Formik } from 'formik';
+import * as Yup from 'yup';
 import Base from '../layouts/base';
 import Text from '../components/text';
 import { Col, Row } from '../components/grid';
@@ -9,9 +10,12 @@ import Button from '../components/button';
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePost, getPost, reset as resetPosts } from '../services/slices/posts';
 import EditorField from '../components/editor-field';
-import { Form, Formik } from 'formik';
 import { serialize } from '../services/serializer';
 import NoMatch from './no-match';
+
+const schema = Yup.object({
+  title: Yup.string().required()
+});
 
 const EditPost = () => {
   const dispatch = useDispatch();
@@ -47,16 +51,16 @@ const EditPost = () => {
       <Row $center>
         <Col md={5}>
           <Text variant="h3" className="mb-20">Edit post</Text>
-          <Formik
-            enableReinitialize={true}
-            initialValues={{
-              title: currentPost ? currentPost.title : '',
-              content: currentPost && currentPost.content
-            }}
-            onSubmit={({ title, content }) => dispatch(updatePost({ id, title, content: serialize(content) }))}
-          >
-            {({ errors, touched, handleChange, handleBlur, handleSubmit, values }) => {
-              return (
+          {currentPost && (
+            <Formik
+              validationSchema={schema}
+              initialValues={{
+                title: currentPost.title,
+                content: currentPost.content
+              }}
+              onSubmit={({ title, content }) => dispatch(updatePost({ id, title, content: serialize(content) }))}
+            >
+              {({ errors, touched, handleChange, handleBlur, handleSubmit, values }) => (
                 <Form>
                   <Input
                     name="title"
@@ -65,15 +69,18 @@ const EditPost = () => {
                     value={values.title}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    error={errors.title && touched.title}
+                    errorText={errors.title}
                   />
                   <EditorField
                     name="content"
                   />
                   <Button fullWidth size="big" type="submit" loading={isLoading}>Submit</Button>
                 </Form>
-              )
-            }}
-          </Formik>
+              )}
+            </Formik>
+          )}
+
         </Col>
       </Row>
     </Base>

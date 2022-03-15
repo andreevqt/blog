@@ -227,7 +227,8 @@ const Editor = ({
   name,
   value,
   onChange,
-  onBlur
+  onBlur,
+  error
 }) => {
   const editor = useMemo(
     () => withCorrectVoidBehavior(withImages(withHistory(withReact(createEditor())))),
@@ -252,6 +253,7 @@ const Editor = ({
           onBlur={onBlur}
         />
       </EditorWrapper>
+      {error}
     </Slate >
   );
 };
