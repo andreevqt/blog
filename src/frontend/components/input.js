@@ -32,15 +32,6 @@ const StyledInput = styled(InputInner)`
   color: ${({ theme }) => theme.inputColor};
   border: 1px solid ${({ theme }) => theme.inputBorderColor};
   font-family: 'Montserrat', sans-serif;
-
-  &:not(:placeholder-shown) + label{
-    transform: translate(-3px, -30px) scale(0.9);
-  }
-
-  &::placeholder {
-    opacity: 0;
-  }
-
   transition: all .2s ease;
 `;
 
@@ -48,17 +39,9 @@ const InputWrapper = styled.div`
   position: relative;
   label {
     cursor: text;
-    transition: all 0.2s;
-    transform-origin: left bottom;
     display: inline-block;
-    padding: 2px 3px;
-    color: ${({ theme }) => theme.inputPlaceholderColor};
     font-family: font-family: 'Montserrat', sans-serif;
-    position: absolute;
-    left: 20px;
-    top: 15px;
-    color: ${({ theme }) => theme.inputPlaceholderColor};
-    background-color: ${({ theme }) => theme.inputBgColor};
+    margin-bottom: 10px;
   }
 
   ${StyledInput} {
@@ -74,7 +57,6 @@ const InputWrapper = styled.div`
 
   label {
     ${({ theme, focus }) => focus && `
-        transform: translate(-3px, -25px) scale(0.9);
         color: ${theme.colors.primary.base};
     `}
 
@@ -162,7 +144,6 @@ const Input = React.forwardRef(({
           {...(onChange && { onChange })}
           autoComplete="off"
         />
-        <label>{placeholder}</label>
         {icon && (
           <InputIcon
             onClick={handleIconClick}

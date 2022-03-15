@@ -8,16 +8,15 @@ import Input from '../components/input';
 import Button from '../components/button';
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePost, getPost, reset as resetPosts } from '../services/slices/posts';
+import EditorField from '../components/editor-field';
+import { Form, Formik } from 'formik';
+import { serialize } from '../services/serializer';
 import NoMatch from './no-match';
 
 const EditPost = () => {
   const dispatch = useDispatch();
   const { isLoading, submited, currentPost } = useSelector((store) => store.posts);
   const { user } = useSelector((store) => store.user);
-  const { register, reset, handleSubmit, formState: { errors } } = useForm({
-    mode: 'onTouched'
-  });
-
   const { id } = useParams();
 
   useEffect(() => {
@@ -28,7 +27,6 @@ const EditPost = () => {
   }, []);
 
   useEffect(() => {
-    reset(currentPost);
   }, [currentPost])
 
   if (submited) {
@@ -49,24 +47,33 @@ const EditPost = () => {
       <Row $center>
         <Col md={5}>
           <Text variant="h3" className="mb-20">Edit post</Text>
-          <form onSubmit={handleSubmit(({ title, content }) => dispatch(updatePost({ id, title, content })))}>
-            <Input
-              placeholder="Title"
-              className="mb-15"
-              error={!!errors.title}
-              errorText={errors.title && errors.title.message}
-              {...register('title', { required: 'Required field' })}
-            />
-            <Input
-              placeholder="Content"
-              className="mb-20"
-              rows={5}
-              error={!!errors.content}
-              errorText={errors.content && errors.content.message}
-              {...register('content', { required: 'Required field' })}
-            />
-            <Button fullWidth size="big" type="submit" loading={isLoading}>Submit</Button>
-          </form>
+          <Formik
+            enableReinitialize={true}
+            initialValues={{
+              title: currentPost ? currentPost.title : '',
+              content: currentPost && currentPost.content
+            }}
+            onSubmit={({ title, content }) => dispatch(updatePost({ id, title, content: serialize(content) }))}
+          >
+            {({ errors, touched, handleChange, handleBlur, handleSubmit, values }) => {
+              return (
+                <Form>
+                  <Input
+                    name="title"
+                    placeholder="Title"
+                    className="mb-15"
+                    value={values.title}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  <EditorField
+                    name="content"
+                  />
+                  <Button fullWidth size="big" type="submit" loading={isLoading}>Submit</Button>
+                </Form>
+              )
+            }}
+          </Formik>
         </Col>
       </Row>
     </Base>

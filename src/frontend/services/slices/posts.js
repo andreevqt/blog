@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as api from '../api';
+import { deserialize } from '../serializer';
 
 const initialState = {
   items: [],
@@ -49,7 +50,7 @@ export const getPost = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const { post } = await api.posts.get(id);
-      return post;
+      return { ...post, content: deserialize(post.content) };
     } catch (err) {
       dispatch(setError(err));
       return rejectWithValue(err);
