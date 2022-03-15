@@ -33,9 +33,9 @@ const defaultTheme = {
   bodyBgColor: gray400,
 
   inputPlaceholderColor: gray200,
-  inputBgColor: gray400,
+  inputBgColor: white,
   inputColor: gray100,
-  inputBorderColor: gray500,
+  inputBorderColor: gray300,
 
   container: {
     maxWidth: 1200

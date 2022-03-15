@@ -50,12 +50,12 @@ requests.private.interceptors.request.use(
         throw Error('Wrong or missing token');
       };
 
-      const { tokens } = await api.user.refresh(refreshToken);
-      Cookie.set('accessToken', tokens.access);
-      Cookie.set('refreshToken', tokens.refresh);
+      const { tokens: { access, refresh } } = await api.user.refresh(refreshToken);
+      Cookie.set('accessToken', access);
+      Cookie.set('refreshToken', refresh);
 
       if (config.headers) {
-        config.headers['authorization'] = newAccessToken;
+        config.headers['authorization'] = access;
       }
 
       return config;
