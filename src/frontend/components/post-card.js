@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -8,9 +8,7 @@ import Pen from '../icons/pen';
 import Trash from '../icons/trash';
 import { useSelector } from 'react-redux';
 import { deletePost } from '../services/slices/posts';
-import sanitizeHtml from 'sanitize-html';
-
-const sanitize = (html) => ({ __html: sanitizeHtml(html, { allowedTags: ['img', 'p'], allowedAttributes: { img: ['src', 'alt', 'srcset'] } }) });
+import { sanitize } from '../services/sanitizer';
 
 const Card = styled.div`
   position: relative;
@@ -88,8 +86,7 @@ const PostCard = ({
     }
   }
 
-  console.log(post.content);
-
+  const content = useMemo(() => sanitize(post.content), [post.content]);
 
   return (
     <Card>
@@ -102,7 +99,7 @@ const PostCard = ({
         </Icon>
       </CardHeader>
       {isOpen && (
-        <CardBody dangerouslySetInnerHTML={sanitize(post.content)} />
+        <CardBody dangerouslySetInnerHTML={content} />
       )}
       {isAuthor && (
         <Buttons>

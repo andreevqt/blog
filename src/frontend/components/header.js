@@ -44,7 +44,7 @@ const Header = () => {
           </Logo>
           <Buttons>
             {user
-              ? <Button to="/logout"  variant="secondary" >Logout</Button>
+              ? <Button to="/logout" variant="secondary" >Logout</Button>
               : (
                 <>
                   <Button to="/register" variant="secondary" className="mr-10">
@@ -54,8 +54,7 @@ const Header = () => {
                     Login
                   </Button>
                 </>
-              )
-            }
+              )}
           </Buttons>
         </Container>
       </StyledHeader>

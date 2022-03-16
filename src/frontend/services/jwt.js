@@ -6,5 +6,3 @@ export const decode = (token) => {
 
   return JSON.parse(jsonPayload);
 };
-
-export default decode;

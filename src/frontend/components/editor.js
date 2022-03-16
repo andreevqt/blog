@@ -168,7 +168,6 @@ const Image = ({ attributes, children, element }) => {
 
 const Element = (props) => {
   const { attributes, children, element } = props;
-
   switch (element.type) {
     case 'image':
       return <Image {...props} />;
