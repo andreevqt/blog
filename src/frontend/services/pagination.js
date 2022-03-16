@@ -1,12 +1,10 @@
-export default {
-
+const pagination = {
   makePage: function (value) {
     return value;
   },
 
-
   makePagination: function (currentPage, totalPages, limit) {
-    let items = [];
+    const items = [];
 
     if (totalPages <= 1) {
       return items;
@@ -55,3 +53,5 @@ export default {
     return items;
   }
 };
+
+export default pagination;

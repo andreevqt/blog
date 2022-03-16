@@ -5,6 +5,7 @@ import Container from './grid/container';
 import { Link } from 'react-router-dom';
 import Popup from './popup';
 import { useDispatch, useSelector } from 'react-redux';
+import { setError } from '../services/slices/error';
 
 const StyledHeader = styled.header`
   ${({ theme }) => `
@@ -35,6 +36,8 @@ const Header = () => {
     lastErr: store.error.lastErr
   }));
 
+  const dispatch = useDispatch();
+
   return (
     <>
       <StyledHeader>
@@ -58,11 +61,15 @@ const Header = () => {
           </Buttons>
         </Container>
       </StyledHeader>
-      {lastErr && (
-        <Popup>{
-          lastErr
-        }</Popup>
-      )}
+      {
+        lastErr && (
+          <Popup onClick={() => dispatch(setError(null))}>
+            {
+              lastErr
+            }
+          </Popup>
+        )
+      }
     </>
   );
 };
