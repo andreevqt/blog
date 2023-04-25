@@ -1,0 +1,48 @@
+version: "3"
+services:
+  app:
+    image: myapp
+    restart: on-failure
+    build: .
+    depends_on:
+      - mysqldb
+    environment:
+      APP_URL: ${APP_URL}
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_DATABASE: db
+      DB_HOST: mysqldb
+    ports:
+      - "3000:3000"
+    command: npm run start
+    volumes:
+      - .:/app/
+      - /app/node_modules
+
+  mysqldb:
+    image: mysql:5.7
+    restart: always
+    command: --lower_case_table_names=1
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=db
+    ports:
+      - "3307:3306"
+
+  migration:
+    image: myapp
+    command:
+      - /bin/bash
+      - -c
+      - |
+        ./wait-for-it/wait-for-it.sh mysqldb:3306 -- npm run migrate && npm run seed
+    environment:
+      APP_URL: ${APP_URL}
+      DB_HOST: mysqldb
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_DATABASE: db
+    links:
+      - mysqldb
+    depends_on:
+      - mysqldb
