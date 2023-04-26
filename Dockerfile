@@ -13,6 +13,11 @@ RUN npm install
 
 COPY . .
 
+ARG api_url
+ENV REACT_API_URL ${api_url}
+RUN npm run build
+
 RUN git clone https://github.com/vishnubob/wait-for-it.git
 
-EXPOSE 3000
+ARG port
+EXPOSE ${port}

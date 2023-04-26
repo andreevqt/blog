@@ -39,7 +39,7 @@ const config = {
     port: getInteger(process.env.APP_PORT, 3000),
     secret: getString(process.env.APP_SECRET),
     prefix: getString(process.env.API_PREFIX, '/api'),
-    url: getString(process.env.APP_URL, 'http://localhost'),
+    url: getString(process.env.APP_URL, 'http://localhost:3000'),
   },
   db: {
     user: getString(process.env.DB_USER),
